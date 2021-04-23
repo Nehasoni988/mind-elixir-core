@@ -93,6 +93,8 @@ export let insertSibling = function (el, node) {
     return
   }
   let newNodeObj = node || generateNewObj()
+  newNodeObj.fav = false
+
   insertNodeObj(nodeObj, newNodeObj)
   addParentLink(this.nodeData)
   let t = nodeEle.parentElement
@@ -129,6 +131,8 @@ export let insertBefore = function (el, node) {
     return
   }
   let newNodeObj = node || generateNewObj()
+  newNodeObj.fav = false
+
   insertBeforeNodeObj(nodeObj, newNodeObj)
   addParentLink(this.nodeData)
   let t = nodeEle.parentElement
@@ -178,6 +182,8 @@ export let addChild = function (el, node) {
   }
   let newNodeObj = node || generateNewObj()
   nodeObj.expanded = true
+  nodeObj.fav = false
+  newNodeObj.fav = false
   if (nodeObj.children) nodeObj.children.push(newNodeObj)
   else nodeObj.children = [newNodeObj]
   addParentLink(this.nodeData)

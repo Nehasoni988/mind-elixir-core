@@ -1,4 +1,4 @@
-import { ApplyStylesOnRootNode } from "../src/helper";
+import { ApplyStylesOnRootNode, AttachSuitableIcon } from '../src/helper'
 import info from '../package.json'
 import vari from './var'
 import {
@@ -335,9 +335,7 @@ MindElixir.prototype = {
     addParentLink(this.nodeData)
 
     // Save root node's styling
-    let styleObj = this.nodeData.style
-      ? this.nodeData.style
-      : {}
+    let styleObj = this.nodeData.style ? this.nodeData.style : {}
 
     this.mindElixirBox.className += ' mind-elixir'
     this.mindElixirBox.innerHTML = ''
@@ -397,7 +395,28 @@ MindElixir.prototype = {
     if (!this.overflowHidden) initMouseEvent(this)
 
     // Assign previous colors to root node again.
-    ApplyStylesOnRootNode(this.nodeData.id, styleObj);
+    ApplyStylesOnRootNode(this.nodeData.id, styleObj)
+
+    // MANAGE ROOT NODE's FAV OPERATION
+    if (!this.nodeData.hasOwnProperty('fav')) {
+      this.nodeData.fav = false
+    }
+    let span_el = document.createElement('span')
+    AttachSuitableIcon(span_el, this.nodeData.fav)
+
+    // Insert this custom fav option next to the root element
+    this.root.getElementsByTagName('tpc')[0].appendChild(span_el)
+
+    span_el.onclick = e => {
+      this.nodeData.fav = !this.nodeData.fav
+      let el = this.root
+        .getElementsByTagName('tpc')[0]
+        .getElementsByTagName('span')[0]
+      AttachSuitableIcon(el, this.nodeData.fav)
+
+      // To stop bubbling event
+      e.stopPropagation()
+    }
   },
 }
 // MindElixir.exportSvg = exportSvg

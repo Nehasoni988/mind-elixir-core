@@ -1,4 +1,4 @@
-import { ApplyStylesOnRootNode } from "../../src/helper";
+import { ApplyStylesOnRootNode, AttachSuitableIcon } from '../../src/helper'
 import { LEFT, RIGHT, SIDE } from '../const'
 import vari from '../var'
 
@@ -25,7 +25,28 @@ export let createGroup = function (node) {
 
 export let createTop = function (nodeObj) {
   let top = $d.createElement('t')
+  if (!nodeObj.hasOwnProperty('fav')) {
+    nodeObj.fav = false
+  }
+
+  // MANAGE FAV OPERATION FOR ALL CHILD NODES
   let tpc = createTopic(nodeObj)
+  let span_el = document.createElement('span')
+
+  AttachSuitableIcon(span_el, nodeObj.fav)
+
+  // Insert this custom fav option next to the root element
+  tpc.appendChild(span_el)
+
+  span_el.onclick = e => {
+    nodeObj.fav = !nodeObj.fav
+    let el = tpc.getElementsByTagName('span')[0]
+    AttachSuitableIcon(el, nodeObj.fav)
+
+    // To stop bubbling event
+    e.stopPropagation()
+  }
+
   // TODO allow to add online image
   if (nodeObj.style) {
     tpc.style.color = nodeObj.style.color
@@ -189,12 +210,10 @@ export function createChildren(data, first, direction) {
 export function layout() {
   this.root.innerHTML = ''
   this.box.innerHTML = ''
-  let tpc = createTopic(this.nodeData);
+  let tpc = createTopic(this.nodeData)
 
   // Save root node's styling
-  let styleObj = this.nodeData.style
-    ? this.nodeData.style
-    : {}
+  let styleObj = this.nodeData.style ? this.nodeData.style : {}
 
   tpc.draggable = false
   this.root.appendChild(tpc)
@@ -225,7 +244,7 @@ export function layout() {
   }
 
   // Assign previous colors to root node again.
-  ApplyStylesOnRootNode(this.nodeData.id, styleObj);
+  ApplyStylesOnRootNode(this.nodeData.id, styleObj)
 
-  createChildren(this.nodeData.children, this.box, this.direction);
+  createChildren(this.nodeData.children, this.box, this.direction)
 }
