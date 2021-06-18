@@ -5,9 +5,13 @@ let createButton = (id, name, label = null) => {
 
   button.id = id
   button.classList.add(['tooltip'])
-  button.innerHTML = `<svg class="icon" aria-hidden="true">
-  <use xlink:href="#icon-${name}"></use>
-  </svg>`
+
+  button.innerHTML =
+    name === 'exit'
+      ? `<img src="https://img.icons8.com/windows/17/000000/normal-screen.png"/>`
+      : `<svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-${name}"></use>
+    </svg>`
 
   // Create text for tooltip
   let tooltipTextEl = document.createElement('span')
@@ -26,6 +30,10 @@ function createToolBarRBContainer(mind) {
   let locale = i18n[mind.locale] ? mind.locale : 'en'
 
   let toolBarRBContainer = document.createElement('toolbar')
+
+  let efs = createButton('exitFull', 'exit', i18n[locale].exitFull)
+  efs.setAttribute('style', 'display: none !important')
+
   let fc = createButton('fullscreen', 'full', i18n[locale].fullScreen)
   let gc = createButton('toCenter', 'living', i18n[locale].toCenter)
   let zo = createButton('zoomout', 'move', i18n[locale].zoomOut)
@@ -33,17 +41,36 @@ function createToolBarRBContainer(mind) {
   let percentage = document.createElement('span')
   percentage.innerHTML = '100%'
   toolBarRBContainer.appendChild(fc)
+  toolBarRBContainer.appendChild(efs)
   toolBarRBContainer.appendChild(gc)
   toolBarRBContainer.appendChild(zo)
   toolBarRBContainer.appendChild(zi)
   // toolBarRBContainer.appendChild(percentage)
   toolBarRBContainer.className = 'rb'
   fc.onclick = () => {
+    mind.mindElixirBox
+      .querySelector('.rb #exitFull')
+      .setAttribute('style', 'display: block !important')
+    mind.mindElixirBox
+      .querySelector('.rb #fullscreen')
+      .setAttribute('style', 'display: none !important')
+
     // when full screen mode is on, change the bg color;
     mind.mindElixirBox.style.background = '#fff'
 
     // Make element in full screen mode
     mind.mindElixirBox.requestFullscreen()
+  }
+  efs.onclick = () => {
+    mind.mindElixirBox
+      .querySelector('.rb #exitFull')
+      .setAttribute('style', 'display: none !important')
+    mind.mindElixirBox
+      .querySelector('.rb #fullscreen')
+      .setAttribute('style', 'display: block !important')
+
+    // Exit element from full screen mode
+    document.exitFullscreen()
   }
   gc.onclick = () => {
     mind.toCenter()

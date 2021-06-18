@@ -53,6 +53,7 @@ export default {
     iconsSeparate: 'Separate icons by comma',
 
     fullScreen: 'fullscreen',
+    exitFull: 'exit full',
     toCenter: 'to center',
     zoomIn: 'zoom in',
     zoomOut: 'zoom out',
@@ -95,6 +96,7 @@ export default {
     iconsSeparate: 'הפרד סמלים לפי פסיק',
 
     fullScreen: 'מסך מלא',
+    exitFull: 'יציאה מלאה',
     toCenter: 'למרכז',
     zoomIn: 'לְהִתְמַקֵד',
     zoomOut: 'להקטין את התצוגה',
@@ -120,6 +122,7 @@ export default {
     iconsSeparate: 'افصل بين الرموز بفاصلة',
 
     fullScreen: 'تكبير الشاشة',
+    exitFull: 'יخروج كامل',
     toCenter: 'إلى مركز',
     zoomIn: 'تكبير',
     zoomOut: 'تصغير',
