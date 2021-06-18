@@ -17,8 +17,8 @@ let cn = {
 }
 export default {
   cn,
-  zh_CN:cn,
-  zh_TW:{
+  zh_CN: cn,
+  zh_TW: {
     addChild: '插入子節點',
     addSibling: '插入同級節點',
     removeNode: '刪除節點',
@@ -27,7 +27,7 @@ export default {
     moveUp: '上移',
     moveDown: '下移',
     link: '連接',
-  
+
     font: '文字',
     background: '背景',
     tag: '標簽',
@@ -51,6 +51,14 @@ export default {
     icon: 'Icon',
     tagsSeparate: 'Separate tags by comma',
     iconsSeparate: 'Separate icons by comma',
+
+    fullScreen: 'fullscreen',
+    toCenter: 'to center',
+    zoomIn: 'zoom in',
+    zoomOut: 'zoom out',
+    left: 'left side',
+    right: 'right side',
+    side: 'both side',
   },
   ja: {
     addChild: '子ノードを追加する',
@@ -85,5 +93,38 @@ export default {
     icon: 'אייקון',
     tagsSeparate: 'הפרד תגים לפי פסיק',
     iconsSeparate: 'הפרד סמלים לפי פסיק',
+
+    fullScreen: 'מסך מלא',
+    toCenter: 'למרכז',
+    zoomIn: 'לְהִתְמַקֵד',
+    zoomOut: 'להקטין את התצוגה',
+    left: 'צד שמאל',
+    right: 'צד ימין',
+    side: 'שני הצדדים',
+  },
+  ar: {
+    addChild: 'أضف طفل',
+    addSibling: 'أضف شقيقًا',
+    removeNode: 'قم بإزالة العقدة',
+    focus: 'وضع التركيز',
+    cancelFocus: 'قم بإلغاء وضع التركيز',
+    moveUp: 'تحرك',
+    moveDown: 'تحرك لأسفل',
+    link: 'نهاية لهذه الغاية',
+
+    font: 'الخط',
+    background: 'خلفية',
+    tag: 'بطاقة شعار',
+    icon: 'أيقونة',
+    tagsSeparate: 'افصل بين العلامات بفاصلة',
+    iconsSeparate: 'افصل بين الرموز بفاصلة',
+
+    fullScreen: 'تكبير الشاشة',
+    toCenter: 'إلى مركز',
+    zoomIn: 'تكبير',
+    zoomOut: 'تصغير',
+    left: 'الجهه اليسرى',
+    right: 'الجانب الأيمن',
+    side: 'كلا الجانبين',
   },
 }

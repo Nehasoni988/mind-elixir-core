@@ -1,18 +1,35 @@
-let createButton = (id, name) => {
+import i18n from '../i18n'
+
+let createButton = (id, name, label = null) => {
   let button = document.createElement('span')
+
   button.id = id
+  button.classList.add(['tooltip'])
   button.innerHTML = `<svg class="icon" aria-hidden="true">
-    <use xlink:href="#icon-${name}"></use>
+  <use xlink:href="#icon-${name}"></use>
   </svg>`
+
+  // Create text for tooltip
+  let tooltipTextEl = document.createElement('span')
+  tooltipTextEl.innerText = label
+  tooltipTextEl.classList.add(
+    ['left', 'right', 'side'].includes(name)
+      ? ['tooltiptext_left']
+      : ['tooltiptext_bottom']
+  )
+  button.appendChild(tooltipTextEl)
+
   return button
 }
 
 function createToolBarRBContainer(mind) {
+  let locale = i18n[mind.locale] ? mind.locale : 'en'
+
   let toolBarRBContainer = document.createElement('toolbar')
-  let fc = createButton('fullscreen', 'full')
-  let gc = createButton('toCenter', 'living')
-  let zo = createButton('zoomout', 'move')
-  let zi = createButton('zoomin', 'add')
+  let fc = createButton('fullscreen', 'full', i18n[locale].fullScreen)
+  let gc = createButton('toCenter', 'living', i18n[locale].toCenter)
+  let zo = createButton('zoomout', 'move', i18n[locale].zoomOut)
+  let zi = createButton('zoomin', 'add', i18n[locale].zoomIn)
   let percentage = document.createElement('span')
   percentage.innerHTML = '100%'
   toolBarRBContainer.appendChild(fc)
@@ -23,7 +40,7 @@ function createToolBarRBContainer(mind) {
   toolBarRBContainer.className = 'rb'
   fc.onclick = () => {
     // when full screen mode is on, change the bg color;
-    mind.mindElixirBox.style.background = "#fff";
+    mind.mindElixirBox.style.background = '#fff'
 
     // Make element in full screen mode
     mind.mindElixirBox.requestFullscreen()
@@ -40,21 +57,22 @@ function createToolBarRBContainer(mind) {
     mind.scale((mind.scaleVal += 0.2))
   }
 
-  document.addEventListener('fullscreenchange', (event) => {
+  document.addEventListener('fullscreenchange', event => {
     // Reset the transform scale
-    mind.mindElixirBox.querySelector(".map-canvas").style.transform = "scale(1)";
+    mind.mindElixirBox.querySelector('.map-canvas').style.transform = 'scale(1)'
 
     // Reset the map's position
-    mind.toCenter();
-  });
+    mind.toCenter()
+  })
 
   return toolBarRBContainer
 }
 function createToolBarLTContainer(mind) {
+  let locale = i18n[mind.locale] ? mind.locale : 'en'
   let toolBarLTContainer = document.createElement('toolbar')
-  let l = createButton('tbltl', 'left')
-  let r = createButton('tbltr', 'right')
-  let s = createButton('tblts', 'side')
+  let l = createButton('tbltl', 'left', i18n[locale].left)
+  let r = createButton('tbltr', 'right', i18n[locale].right)
+  let s = createButton('tblts', 'side', i18n[locale].side)
 
   toolBarLTContainer.appendChild(l)
   toolBarLTContainer.appendChild(r)
