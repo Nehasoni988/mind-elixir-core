@@ -1,9 +1,9 @@
 import i18n from '../i18n'
-import { updateNodeMenuStyle } from "../../src/helper";
+import { updateNodeMenuStyle } from '../../src/helper'
 
-export default function(mind) {
+export default function (mind) {
   // Node menu drawer status
-  let state = 'close';
+  let state = 'close'
 
   let locale = i18n[mind.locale] ? mind.locale : 'en'
   let createDiv = (id, name) => {
@@ -35,7 +35,7 @@ export default function(mind) {
     '#E91E63',
     '#795548',
     '#9C27B0',
-    '#000000'
+    '#000000',
   ]
   styleDiv.innerHTML = `
       <div class="nm-fontsize-container">
@@ -63,19 +63,15 @@ export default function(mind) {
       </div>
   `
   tagDiv.innerHTML = `
-      ${i18n[locale].tag}<input class="nm-tag" tabindex="-1" placeholder="${
-    i18n[locale].tagsSeparate
-  }" /><br>
+      ${i18n[locale].tag}<input class="nm-tag" tabindex="-1" placeholder="${i18n[locale].tagsSeparate}" /><br>
   `
   iconDiv.innerHTML = `
-      ${i18n[locale].icon}<input class="nm-icon" tabindex="-1" placeholder="${
-    i18n[locale].iconsSeparate
-  }" /><br>
+      ${i18n[locale].icon}<input class="nm-icon" tabindex="-1" placeholder="${i18n[locale].iconsSeparate}" /><br>
   `
 
-  let menuContainer = document.createElement('nmenu');
+  let menuContainer = document.createElement('nmenu')
 
-  updateNodeMenuStyle(menuContainer, state);
+  updateNodeMenuStyle(menuContainer, state)
 
   menuContainer.innerHTML = `<div class="button-container"><svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-menu"></use>
@@ -87,7 +83,7 @@ export default function(mind) {
 
   function clearSelect(klass, remove) {
     var elems = document.querySelectorAll(klass)
-    ;[].forEach.call(elems, function(el) {
+    ;[].forEach.call(elems, function (el) {
       el.classList.remove(remove)
     })
   }
@@ -171,21 +167,30 @@ export default function(mind) {
     mind.updateNodeIcons(mind.currentNode.nodeObj)
   }
 
+  buttonContainer.classList.add(['tooltip'])
+  // Create text for tooltip
+  let tooltipTextEl = document.createElement('span')
+  tooltipTextEl.innerText = i18n[locale].menuTooltipText
+  tooltipTextEl.classList.add(['tooltiptext_right'])
+  buttonContainer.appendChild(tooltipTextEl)
+
   buttonContainer.onclick = e => {
     if (!mind.currentNode) {
-      return;
+      return
     }
     if (state === 'open') {
       state = 'close'
-      updateNodeMenuStyle(menuContainer, state);
+      updateNodeMenuStyle(menuContainer, state)
 
       buttonContainer.innerHTML = `<svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-menu"></use>
         </svg>
       `
+      // Append tooltip again because after open menu, tooltip el disappeared
+      buttonContainer.appendChild(tooltipTextEl)
     } else {
       state = 'open'
-      updateNodeMenuStyle(menuContainer, state);
+      updateNodeMenuStyle(menuContainer, state)
 
       buttonContainer.innerHTML = `<svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-close"></use>
@@ -193,15 +198,15 @@ export default function(mind) {
       `
     }
   }
-  mind.bus.addListener('unselectNode', function() {
-    state = 'close';
-    updateNodeMenuStyle(menuContainer, state);
+  mind.bus.addListener('unselectNode', function () {
+    state = 'close'
+    updateNodeMenuStyle(menuContainer, state)
 
     buttonContainer.innerHTML = `<svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-menu"></use>
     </svg>`
   })
-  mind.bus.addListener('selectNode', function(nodeObj) {
+  mind.bus.addListener('selectNode', function (nodeObj) {
     clearSelect('.palette', 'nmenu-selected')
     clearSelect('.size', 'size-selected')
     clearSelect('.bold', 'size-selected')

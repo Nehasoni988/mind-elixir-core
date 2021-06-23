@@ -35,7 +35,8 @@ toolbar {
 }
 
 .tooltiptext_left,
-.tooltiptext_bottom {
+.tooltiptext_bottom,
+.tooltiptext_right {
   visibility: hidden;
   width: 90px;
   background-color: black;
@@ -55,6 +56,12 @@ toolbar {
 .tooltiptext_bottom {
   top: -38px;
   right: -26px;
+}
+
+.tooltiptext_right {
+  right: 30px;
+  top: -10px;
+  width: 300px !important;
 }
 
 .tooltiptext_left::after {
@@ -79,8 +86,20 @@ toolbar {
   border-color: black transparent transparent transparent;
 }
 
+.tooltip .tooltiptext_right::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
 .tooltip:hover .tooltiptext_left,
-.tooltip:hover .tooltiptext_bottom {
+.tooltip:hover .tooltiptext_bottom,
+.tooltip:hover .tooltiptext_right {
   visibility: visible;
   border-bottom: 1px dotted black;
 }

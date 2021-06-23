@@ -60,6 +60,7 @@ export default {
     left: 'left side',
     right: 'right side',
     side: 'both side',
+    menuTooltipText: 'Select any node first then click on it',
   },
   ja: {
     addChild: '子ノードを追加する',
@@ -103,6 +104,7 @@ export default {
     left: 'צד שמאל',
     right: 'צד ימין',
     side: 'שני הצדדים',
+    menuTooltipText: 'בחר תחילה כל צומת ואז לחץ עליו',
   },
   ar: {
     addChild: 'أضف طفل',
@@ -129,5 +131,6 @@ export default {
     left: 'الجهه اليسرى',
     right: 'الجانب الأيمن',
     side: 'كلا الجانبين',
+    menuTooltipText: 'حدد أي عقدة أولاً ثم انقر عليها',
   },
 }
